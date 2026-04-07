@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erik — Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0a0c; font-family: 'DM Sans', sans-serif; color: #fff;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .bg-glow {
+      position: fixed; inset: 0; opacity: 0.3; pointer-events: none;
+      background: radial-gradient(ellipse at 30% 50%, rgba(0,220,220,0.15), transparent 60%),
+                  radial-gradient(ellipse at 70% 60%, rgba(255,120,50,0.1), transparent 50%);
+    }
+    .slider-wrap {
+      position: relative; width: 100%; max-width: 1000px; aspect-ratio: 16/10;
+      border-radius: 16px; overflow: hidden; margin: 24px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+    }
+    .main-img { position: absolute; inset: 0; }
+    .main-img img { width: 100%; height: 100%; object-fit: cover; animation: fadeScale 0.6s ease-out both; }
+    .main-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+    }
+    .autoplay-btn {
+      position: absolute; top: 16px; right: 16px; z-index: 10;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 16px; transition: all 0.2s;
+    }
+    .autoplay-btn:hover { background: rgba(255,255,255,0.2); }
+    .card {
+      position: absolute; bottom: 24px; right: 24px; z-index: 10;
+      width: 340px; border-radius: 16px; overflow: hidden;
+      background: rgba(12,12,18,0.55); backdrop-filter: blur(24px) saturate(1.5);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .card-inner { padding: 20px 24px 12px; }
+    .card-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .arrow {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+      color: #00dcd4; font-size: 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; line-height: 1;
+    }
+    .arrow:hover { background: rgba(255,255,255,0.15); }
+    .counter-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 3px;
+      color: #00dcd4; text-transform: uppercase; margin-bottom: 2px; text-align: center;
+    }
+    .counter { text-align: center; font-size: 24px; font-weight: 700; }
+    .counter span { font-size: 14px; color: rgba(255,255,255,0.35); font-weight: 400; }
+    .title-block { animation: slideUp 0.4s ease-out both; }
+    .title-block h2 {
+      font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 800;
+      margin: 0 0 4px; line-height: 1.1;
+    }
+    .title-block p { font-size: 13px; color: rgba(255,255,255,0.5); margin: 0; line-height: 1.4; }
+    .thumbs { display: flex; gap: 6px; padding: 8px 24px 16px; overflow-x: auto; }
+    .thumb {
+      flex: 0 0 60px; height: 44px; border-radius: 8px; overflow: hidden;
+      border: 2px solid transparent; cursor: pointer; padding: 0; background: none;
+      opacity: 0.5; transition: all 0.25s ease;
+    }
+    .thumb.active { border-color: #00dcd4; opacity: 1; box-shadow: 0 0 12px rgba(0,220,212,0.3); }
+    .thumb:hover:not(.active) { opacity: 0.8; }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .progress-track { height: 3px; background: rgba(255,255,255,0.06); }
+    .progress-bar {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #00dcd4, #00b4ff);
+      box-shadow: 0 0 8px rgba(0,220,212,0.5);
+    }
+    @keyframes fadeScale { from { opacity: 0; transform: scale(1.05); } to { opacity: 1; transform: scale(1); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 700px) {
+      .slider-wrap { aspect-ratio: 9/16; margin: 12px; border-radius: 12px; }
+      .card { width: calc(100% - 24px); left: 12px; right: 12px; bottom: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="slider-wrap">
+    <div class="main-img"><img id="mainImage" src="" alt=""></div>
+    <button class="autoplay-btn" id="autoplayBtn">⟳</button>
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-nav">
+          <button class="arrow" id="prevBtn">‹</button>
+          <div>
+            <div class="counter-label">PORTFOLIO</div>
+            <div class="counter"><span id="counterNum">01</span><span> / <span id="counterTotal">08</span></span></div>
+          </div>
+          <button class="arrow" id="nextBtn">›</button>
+        </div>
+        <div class="title-block" id="titleBlock">
+          <h2 id="slideTitle"></h2>
+          <p id="slideSub"></p>
+        </div>
+      </div>
+      <div class="thumbs" id="thumbStrip"></div>
+      <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+    </div>
+  </div>
+  <script>
+    const CLOUD = "https://res.cloudinary.com/dy5pwpsoi/image/upload/f_auto,q_auto,w_1200";
+    const images = [
+      { src: CLOUD+"/hero_xwbj9f.jpg", title: "Velvet Hour", sub: "When the light bends just right." },
+      { src: CLOUD+"/2_imyao0.jpg", title: "Ghost Signal", sub: "Frequencies only film can hear." },
+      { src: CLOUD+"/3_orgiq9.jpg", title: "Still Burning", sub: "A slow fire behind the frame." },
+      { src: CLOUD+"/5_hpr4vn.jpg", title: "Neon Psalm", sub: "Nashville after the curtain falls." },
+      { src: CLOUD+"/7_ngy5bh.jpg", title: "Midnight Legend", sub: "A hero's ride through the dusk." },
+      { src: CLOUD+"/9_sj4iuy.jpg", title: "Phantom Grain", sub: "Texture you can almost touch." },
+      { src: CLOUD+"/11_z7m3mz.jpg", title: "Low Tide", sub: "Where the coastline exhales." },
+      { src: CLOUD+"/14_onb3by.jpg", title: "Last Frame", sub: "The shot you almost missed." },
+    ];
+    const DURATION=5000;let current=0,paused=false,transitioning=false,timer,startTime,rafId;
+    const mainImage=document.getElementById('mainImage'),slideTitle=document.getElementById('slideTitle'),slideSub=document.getElementById('slideSub'),counterNum=document.getElementById('counterNum'),counterTotal=document.getElementById('counterTotal'),titleBlock=document.getElementById('titleBlock'),progressBar=document.getElementById('progressBar'),thumbStrip=document.getElementById('thumbStrip'),autoplayBtn=document.getElementById('autoplayBtn');
+    counterTotal.textContent=String(images.length).padStart(2,'0');
+    images.forEach((img,i)=>{const btn=document.createElement('button');btn.className='thumb'+(i===0?' active':'');btn.innerHTML='<img src="'+img.src+'" alt="">';btn.addEventListener('click',()=>goTo(i,i>current?1:-1));thumbStrip.appendChild(btn);});
+    function render(){const img=images[current];mainImage.src=img.src;mainImage.alt=img.title;mainImage.style.animation='none';mainImage.offsetHeight;mainImage.style.animation='fadeScale 0.6s ease-out both';slideTitle.textContent=img.title;slideSub.textContent=img.sub;counterNum.textContent=String(current+1).padStart(2,'0');titleBlock.style.animation='none';titleBlock.offsetHeight;titleBlock.style.animation='slideUp 0.4s ease-out both';document.querySelectorAll('.thumb').forEach((t,i)=>{t.classList.toggle('active',i===current);});}
+    function goTo(idx,dir){if(transitioning||idx===current)return;transitioning=true;progressBar.style.width='0%';setTimeout(()=>{current=idx;render();transitioning=false;resetAutoplay();},100);}
+    function next(){goTo((current+1)%images.length,1);}function prev(){goTo((current-1+images.length)%images.length,-1);}
+    function resetAutoplay(){clearTimeout(timer);if(!paused){startTime=Date.now();timer=setTimeout(next,DURATION);}}
+    function tickProgress(){if(!paused&&!transitioning){const e=Date.now()-startTime;progressBar.style.width=Math.min(e/DURATION*100,100)+'%';}rafId=requestAnimationFrame(tickProgress);}
+    document.getElementById('prevBtn').addEventListener('click',prev);document.getElementById('nextBtn').addEventListener('click',next);
+    autoplayBtn.addEventListener('click',()=>{paused=!paused;autoplayBtn.textContent=paused?'\u25B6':'\u27F3';if(!paused)resetAutoplay();else{clearTimeout(timer);progressBar.style.width='0%';}});
+    document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev();});
+    let touchStartX=0;document.querySelector('.slider-wrap').addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX;});document.querySelector('.slider-wrap').addEventListener('touchend',e=>{const d=e.changedTouches[0].screenX-touchStartX;if(Math.abs(d)>50)d<0?next():prev();});
+    render();resetAutoplay();tickProgress();
+  </script>
+</body>
+</html>
