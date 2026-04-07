@@ -3,105 +3,178 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>ERIK — Stills, Sound & Motion</title>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<title>Erik Van Nguyen — Stills, Sound & Motion</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:#030305;font-family:'DM Sans',sans-serif;color:#fff;overflow-x:hidden}
-::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.04)}
-a{text-decoration:none;color:rgba(255,255,255,0.22);transition:color 0.3s;letter-spacing:0.15em}a:hover{color:rgba(255,255,255,0.5)}
-.hero{position:relative;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center}
-.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center top;filter:brightness(0.35) saturate(0.5);transform:scale(1.08);will-change:transform}
-.hero-vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 20%,#030305 70%)}
-.hero-grain{position:absolute;inset:0;opacity:0.03;mix-blend-mode:overlay;filter:url(#grain);pointer-events:none}
-.nav{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:32px 48px;z-index:10;opacity:0;transition:all 1s ease 0.3s}.nav.on{opacity:1}
-.nav-l{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.25)}
-.nav-r{display:flex;gap:36px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase}
-.mw{position:relative;z-index:2;opacity:0;transform:scale(0.85);transition:opacity 2s ease 0.5s,transform 2s cubic-bezier(0.16,1,0.3,1) 0.5s}.mw.on{opacity:1;transform:scale(1)}
-.et{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(80px,18vw,240px);letter-spacing:0.1em;line-height:0.95;user-select:none;white-space:nowrap}
-.el{position:absolute;inset:0;pointer-events:none}
-.sw{animation:sw 16s cubic-bezier(0.4,0,0.2,1) infinite;background-size:350% 100%}
-@keyframes sw{0%{background-position:-50% center}100%{background-position:300% center}}
-@keyframes sp{0%,100%{opacity:0.15}50%{opacity:0.35}}
-.sub{position:relative;z-index:2;font-family:'DM Mono',monospace;font-size:clamp(8px,1vw,10px);color:rgba(255,255,255,0.18);margin-top:40px;letter-spacing:0.4em;text-transform:uppercase;opacity:0;transition:opacity 1.5s ease 1.5s}.sub.on{opacity:1}
-.sc{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px}
-.sc span{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2)}
-.sl{width:1px;height:44px;background:linear-gradient(to bottom,rgba(255,255,255,0.15),transparent);animation:sp 3s ease-in-out infinite}
-.gal{padding:120px 24px 160px;max-width:1100px;margin:0 auto}
-.gh{text-align:center;margin-bottom:80px}
-.gh p{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.15);margin-bottom:16px}
-.gh h2{font-family:'Chakra Petch',sans-serif;font-size:clamp(20px,3vw,34px);font-weight:700;letter-spacing:0.12em;color:rgba(255,255,255,0.65)}
-.gg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.gc{display:flex;flex-direction:column;gap:14px}.gc.l{margin-top:70px}
-.cd{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:3/4;opacity:0;transform:translateY(50px);transition:opacity 0.9s ease,transform 0.9s ease;cursor:pointer}
-.cd.v{opacity:1;transform:translateY(0)}
-.cd img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1)}
-.cd:hover img{transform:scale(1.04)}
-.co{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 45%);opacity:0;transition:opacity 0.4s;display:flex;align-items:flex-end;padding:18px}
-.cd:hover .co{opacity:1}
-.co span{font-family:'Chakra Petch',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.7)}
-.ct{padding:80px 48px 120px;max-width:500px;margin:0 auto;text-align:center}
-.ct p{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.15);margin-bottom:16px}
-.ct .em{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.4);border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:3px}
-.ct .lk{margin-top:20px;display:flex;justify-content:center;gap:28px}.ct .lk a{font-size:10px}
-footer{padding:20px 48px;border-top:1px solid rgba(255,255,255,0.025);display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:8px;color:rgba(255,255,255,0.1)}
-@media(max-width:600px){.nav{padding:20px 24px}.gal{padding:80px 16px 100px}.gc.l{margin-top:40px}footer{padding:16px 24px}}
+body{background:#0a0a0c;font-family:'DM Sans',sans-serif;color:#fff;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px}
+a{text-decoration:none;color:rgba(255,255,255,0.6);transition:color 0.2s}a:hover{color:#fff}
+
+.hero{position:relative;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 72px}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center top;filter:brightness(0.4);transform:scale(1.05);will-change:transform}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(to top,#0a0a0c 0%,rgba(10,10,12,0.3) 40%,rgba(10,10,12,0.15) 100%)}
+.nav{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:28px 48px;z-index:10;opacity:0;animation:fadeIn 0.8s ease 0.2s forwards}
+.nav-name{font-family:'EB Garamond',serif;font-size:20px;font-weight:700}
+.nav-links{display:flex;gap:32px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase}
+.hero-text{position:relative;z-index:2}
+.hero-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:16px;opacity:0;animation:fadeUp 0.8s ease 0.4s forwards}
+.hero-title{font-family:'EB Garamond',serif;font-size:clamp(48px,8vw,96px);font-weight:400;line-height:1;opacity:0;animation:fadeUp 0.8s ease 0.6s forwards}
+.hero-title em{font-style:italic}
+.scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px}
+.scroll-cue span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;color:rgba(255,255,255,0.3)}
+.scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,rgba(255,255,255,0.3),transparent);animation:pulse 2s ease-in-out infinite}
+
+.transition-zone{position:relative;height:20vh;display:flex;align-items:center;justify-content:center}
+.transition-zone p{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.1)}
+
+.fan-section{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;perspective:1200px;perspective-origin:50% 50%;padding:60px 0;overflow:visible}
+.fan-container{position:relative;width:100%;max-width:1200px;height:520px;transform-style:preserve-3d}
+.fan-card{position:absolute;left:50%;top:50%;border-radius:12px;overflow:hidden;transform-style:preserve-3d;cursor:pointer;backface-visibility:hidden}
+.fan-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease}
+.fan-card:hover img{transform:scale(1.06)}
+.fan-card .overlay{position:absolute;bottom:0;left:0;right:0;padding:20px 14px 14px;background:linear-gradient(to top,rgba(0,0,0,0.85),transparent);opacity:0;transition:opacity 0.3s;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase}
+.fan-card:hover .overlay{opacity:1}
+
+.contact{padding:120px 48px;max-width:600px;margin:0 auto;text-align:center}
+.contact .label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:12px}
+.contact h2{font-family:'EB Garamond',serif;font-size:36px;font-weight:400;font-style:italic;margin:0 0 24px}
+.contact .email{font-family:'DM Mono',monospace;font-size:14px;color:#fff;border-bottom:1px solid rgba(255,255,255,0.3);padding-bottom:2px}
+.contact .links{margin-top:16px;display:flex;justify-content:center;gap:24px}
+.contact .links a{font-size:12px;color:rgba(255,255,255,0.5)}
+footer{padding:24px 48px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2)}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:0.3}50%{opacity:0.7}}
+
+@media(max-width:600px){
+  .hero{padding:0 24px 48px}.nav{padding:20px 24px}
+  .fan-container{height:400px}
+  .contact{padding:80px 24px}
+  footer{padding:16px 24px;flex-direction:column;gap:8px}
+}
 </style>
 </head>
 <body>
-<svg style="position:absolute;width:0;height:0" aria-hidden="true"><defs><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></defs></svg>
 
 <section class="hero">
-<div class="hero-bg" id="hb" style="background-image:url(https://res.cloudinary.com/dy5pwpsoi/image/upload/f_auto,q_auto,w_1200/hero_xwbj9f.jpg)"></div>
-<div class="hero-vig"></div>
-<div class="hero-grain"></div>
-<nav class="nav" id="nv"><span class="nav-l">Stills, Sound &amp; Motion</span><div class="nav-r"><a href="#work">Work</a><a href="#contact">Contact</a></div></nav>
-<div class="mw" id="mw">
-<div style="position:relative">
-<div id="ag" style="position:absolute;inset:-30%;pointer-events:none"></div>
-<div class="et el" id="rR" style="mix-blend-mode:screen">ERIK</div>
-<div class="et el" id="rG" style="mix-blend-mode:screen">ERIK</div>
-<div class="et el" id="rB" style="mix-blend-mode:screen">ERIK</div>
-<div class="et el" id="bl">ERIK</div>
-<div class="et el" id="wg" style="filter:blur(25px)">ERIK</div>
-<div class="et" style="color:#fff;position:relative;text-shadow:0 0 2px rgba(255,255,255,0.3)">ERIK</div>
-<div class="et el" id="mg" style="-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">ERIK</div>
-<div class="et el sw" style="-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;background-image:linear-gradient(100deg,transparent 0%,rgba(255,255,255,0) 35%,rgba(255,255,255,0.15) 43%,rgba(255,255,255,0.4) 46%,rgba(255,255,255,0.15) 49%,rgba(255,255,255,0) 57%,transparent 100%)">ERIK</div>
-<div class="et el" id="rl" style="-webkit-text-fill-color:transparent">ERIK</div>
-</div>
-</div>
-<p class="sub" id="sb">Filmmaker&nbsp;&middot;&nbsp;Photographer&nbsp;&middot;&nbsp;Audio Engineer</p>
-<div class="sc" id="sc"><span>Scroll to explore</span><div class="sl"></div></div>
+  <div class="hero-bg" id="heroBg" style="background-image:url(https://res.cloudinary.com/dy5pwpsoi/image/upload/f_auto,q_auto,w_1200/hero_xwbj9f.jpg)"></div>
+  <div class="hero-grad"></div>
+  <nav class="nav">
+    <span class="nav-name">Erik Van Nguyen</span>
+    <div class="nav-links"><a href="#work">Work</a><a href="#contact">Contact</a></div>
+  </nav>
+  <div class="hero-text" id="heroText">
+    <p class="hero-label">Stills, Sound & Motion</p>
+    <h1 class="hero-title">Capturing<br><em>the unseen</em></h1>
+  </div>
+  <div class="scroll-cue" id="scrollCue">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
 </section>
 
-<section class="gal" id="work"><div class="gh"><p>Selected Work</p><h2>PORTFOLIO</h2></div><div class="gg"><div class="gc l" id="lc"></div><div class="gc" id="rc"></div></div></section>
-<section class="ct" id="contact"><p>Get in touch</p><a href="mailto:erik@cmngrdn.com" class="em">erik@cmngrdn.com</a><div class="lk"><a href="https://instagram.com/thebadnights" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://vimeo.com/1171375775" target="_blank" rel="noopener noreferrer">Vimeo</a></div></section>
-<footer><span>&copy; 2026 Erik Van Nguyen</span><span>Stills, Sound &amp; Motion</span></footer>
+<div class="transition-zone"><p>Selected Work</p></div>
+
+<section class="fan-section" id="work">
+  <div class="fan-container" id="fanContainer"></div>
+</section>
+
+<div style="height:40vh"></div>
+
+<section class="contact" id="contact">
+  <p class="label">Get in touch</p>
+  <h2>Let's create together</h2>
+  <a href="mailto:erik@cmngrdn.com" class="email">erik@cmngrdn.com</a>
+  <div class="links">
+    <a href="https://instagram.com/thebadnights" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://vimeo.com/1171375775" target="_blank" rel="noopener noreferrer">Vimeo</a>
+  </div>
+</section>
+<footer><span>&copy; 2026 Erik Van Nguyen</span><span>Stills, Sound & Motion</span></footer>
 
 <script>
 const C="https://res.cloudinary.com/dy5pwpsoi/image/upload/f_auto,q_auto,w_800";
-const L=[{s:"/hero_xwbj9f.jpg",t:"Velvet Hour"},{s:"/3_orgiq9.jpg",t:"Still Burning"},{s:"/5_hpr4vn.jpg",t:"Neon Psalm"},{s:"/9_sj4iuy.jpg",t:"Phantom Grain"},{s:"/12_q9oxzv.jpg",t:"Half Light"},{s:"/4_boeiu5.jpg",t:"After Hours"},{s:"/15_x7ut9k.jpg",t:"Silver Lining"}];
-const R=[{s:"/2_imyao0.jpg",t:"Ghost Signal"},{s:"/7_ngy5bh.jpg",t:"Midnight Legend"},{s:"/11_z7m3mz.jpg",t:"Low Tide"},{s:"/14_onb3by.jpg",t:"Last Frame"},{s:"/8_fpfdph.jpg",t:"Ember Glow"},{s:"/6_novhyu.jpg",t:"Drift"},{s:"/10_wbujwt.jpg",t:"Iron Sky"}];
-function bc(a,el){a.forEach((m,i)=>{const d=document.createElement('div');d.className='cd';d.style.transitionDelay=(i*0.1)+'s';d.innerHTML='<img src="'+C+m.s+'" alt="'+m.t+'" loading="lazy"><div class="co"><span>'+m.t+'</span></div>';el.appendChild(d)})}
-bc(L,document.getElementById('lc'));bc(R,document.getElementById('rc'));
-const ob=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')})},{threshold:0.12});
-document.querySelectorAll('.cd').forEach(c=>ob.observe(c));
-setTimeout(()=>{document.getElementById('nv').classList.add('on');document.getElementById('mw').classList.add('on');document.getElementById('sb').classList.add('on')},200);
-const hb=document.getElementById('hb'),mw=document.getElementById('mw'),rR=document.getElementById('rR'),rG=document.getElementById('rG'),rB=document.getElementById('rB'),bl=document.getElementById('bl'),wg=document.getElementById('wg'),mg=document.getElementById('mg'),rl=document.getElementById('rl'),ag=document.getElementById('ag'),sc=document.getElementById('sc'),sb=document.getElementById('sb');
-function tick(){const sy=window.scrollY,t=Math.min(sy/400,1),ho=Math.max(1-sy/500,0);
-hb.style.transform='translateY('+sy*0.35+'px) scale(1.08)';
-mw.style.opacity=ho;mw.style.transform='scale('+(1-t*0.03)+')';sb.style.opacity=ho;sc.style.opacity=Math.max(0.3-t*0.6,0);
-const sp=t*7,ra=0.06+t*0.22,ga=0.04+t*0.18,ba=0.06+t*0.22,br=0.5+t*1.2;
-rR.style.color='rgba(255,20,0,'+ra+')';rR.style.transform='translate('+-sp+'px,'+sp*0.15+'px)';rR.style.filter='blur('+br+'px)';
-rG.style.color='rgba(0,255,40,'+ga+')';rG.style.transform='translate(0,'+-t*2.5+'px)';rG.style.filter='blur('+(0.3+t*0.6)+'px)';
-rB.style.color='rgba(0,60,255,'+ba+')';rB.style.transform='translate('+sp+'px,'+-sp*0.1+'px)';rB.style.filter='blur('+br+'px)';
-bl.style.color='rgba(255,255,255,'+(0.06+t*0.18)+')';bl.style.filter='blur('+(5+t*18)+'px)';
-wg.style.color='rgba(255,180,120,'+t*0.08+')';
-const an=108+t*50;mg.style.backgroundImage='linear-gradient('+an+'deg,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 22%,rgba(255,255,255,0.1) 33%,rgba(0,0,0,0) 43%,rgba(0,0,0,0.55) 56%,rgba(0,0,0,0) 70%,rgba(255,255,255,0.08) 83%,rgba(0,0,0,0.35) 100%)';
-rl.style.webkitTextStroke='0.5px rgba(255,255,255,'+(0.12+t*0.08)+')';
-ag.style.background='radial-gradient(ellipse at center,rgba(200,210,240,'+(0.02+t*0.05)+'),transparent 55%)';}
-window.addEventListener('scroll',tick,{passive:true});tick();
+const photos=[
+  {s:"/2_imyao0.jpg",t:"Ghost Signal"},{s:"/3_orgiq9.jpg",t:"Still Burning"},
+  {s:"/5_hpr4vn.jpg",t:"Neon Psalm"},{s:"/7_ngy5bh.jpg",t:"Midnight Legend"},
+  {s:"/9_sj4iuy.jpg",t:"Phantom Grain"},{s:"/11_z7m3mz.jpg",t:"Low Tide"},
+  {s:"/14_onb3by.jpg",t:"Last Frame"},{s:"/4_boeiu5.jpg",t:"After Hours"},
+  {s:"/6_novhyu.jpg",t:"Drift"},{s:"/8_fpfdph.jpg",t:"Ember Glow"},
+  {s:"/10_wbujwt.jpg",t:"Iron Sky"},{s:"/12_q9oxzv.jpg",t:"Half Light"},
+  {s:"/15_x7ut9k.jpg",t:"Silver Lining"},{s:"/1_nfjpd4.jpg",t:"First Light"},
+];
+
+const fc=document.getElementById('fanContainer');
+const cardW=window.innerWidth<600?120:200;
+
+photos.forEach((p,i)=>{
+  const d=document.createElement('div');
+  d.className='fan-card';
+  d.style.width=cardW+'px';
+  d.style.aspectRatio='3/4';
+  d.innerHTML='<img src="'+C+p.s+'" alt="'+p.t+'" loading="lazy"><div class="overlay">'+p.t+'</div>';
+  fc.appendChild(d);
+});
+
+const cards=document.querySelectorAll('.fan-card');
+const heroBg=document.getElementById('heroBg');
+const heroText=document.getElementById('heroText');
+const scrollCue=document.getElementById('scrollCue');
+const fanSection=document.getElementById('work');
+const total=cards.length;
+const center=(total-1)/2;
+
+function easeOut(t){return 1-Math.pow(1-t,3)}
+
+function update(){
+  const sy=window.scrollY;
+  const vh=window.innerHeight;
+  const heroOp=Math.max(1-sy/500,0);
+
+  // Hero parallax
+  heroBg.style.transform='translateY('+sy*0.4+'px) scale(1.05)';
+  heroText.style.opacity=heroOp;
+  scrollCue.style.opacity=heroOp*0.5;
+
+  // Fan progress
+  const fanRect=fanSection.getBoundingClientRect();
+  const rawProgress=(vh-fanRect.top)/(vh*0.8);
+  const fp=Math.max(0,Math.min(1,rawProgress));
+  const p=easeOut(fp);
+
+  cards.forEach((card,i)=>{
+    const offset=i-center;
+    const absOff=Math.abs(offset);
+
+    // Fan spread
+    const angle=offset*9*p;
+    const x=offset*(75*p);
+    const z=-absOff*(35*p);
+    const stackZ=-i*3*(1-p);
+
+    // Slight vertical wave
+    const wave=Math.sin((i/total)*Math.PI)*15*p;
+
+    card.style.transform=
+      'translateX(calc(-50% + '+x+'px)) '+
+      'translateY(calc(-50% + '+(-wave)+'px)) '+
+      'translateZ('+(z+stackZ)+'px) '+
+      'rotateY('+angle+'deg)';
+
+    card.style.boxShadow='0 '+(8+absOff*3)+'px '+(25+absOff*8)+'px rgba(0,0,0,'+(0.3+p*0.4)+')';
+    card.style.zIndex=total-Math.round(absOff);
+
+    // Fade in cards as they fan
+    card.style.opacity=0.3+p*0.7;
+  });
+
+  requestAnimationFrame(update);
+}
+
+requestAnimationFrame(update);
 </script>
 </body>
 </html>
