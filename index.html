@@ -37,8 +37,9 @@
     .hero-to-gallery iframe{position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:100vh;min-height:100%;transform:translate(-50%,-50%);border:0;pointer-events:none;}
 
     /* ── Scroll indicator ── */
-    .scroll-indicator{position:absolute;bottom:32px;right:32px;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:4;pointer-events:none;}
+    .scroll-indicator{position:absolute;bottom:32px;right:32px;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:4;pointer-events:auto;cursor:pointer;padding:16px;-webkit-tap-highlight-color:transparent;}
     .scroll-indicator span{font-family:'EB Garamond',serif;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,240,235,0.6);writing-mode:vertical-rl;text-orientation:mixed;text-shadow:0 1px 10px rgba(0,0,0,0.4);}
+    .scroll-indicator:active span{color:rgba(245,240,235,0.9);}
     .scroll-arrow{width:1px;height:40px;position:relative;overflow:hidden;}
     .scroll-arrow::after{content:'';position:absolute;top:-100%;left:0;width:1px;height:100%;background:linear-gradient(to bottom,transparent,rgba(245,240,235,0.6));animation:scrollPulse 2s ease-in-out infinite;}
     .scroll-chevron{width:12px;height:12px;border-right:1px solid rgba(245,240,235,0.5);border-bottom:1px solid rgba(245,240,235,0.5);transform:rotate(45deg);animation:chevronBounce 2s ease-in-out infinite;}
@@ -135,7 +136,7 @@
       <span class="hero-sub">Stills, Sound & Motion</span>
     </div>
     <div class="hero-hint" id="hint">hover to reveal</div>
-    <div class="scroll-indicator">
+    <div class="scroll-indicator" id="scrollToReel">
       <span>Film Reel</span>
       <div class="scroll-arrow"></div>
       <div class="scroll-chevron"></div>
@@ -247,7 +248,7 @@ const maxDPR = isMobile ? 1.5 : 2;
   const hintEl = document.getElementById('hint');
   const heroEl = document.getElementById('hero');
   const isTouch = 'ontouchstart' in window;
-  if (isTouch) hintEl.textContent = 'tap to reveal';
+  if (isTouch) hintEl.textContent = 'touch to reveal';
   if (!gl) return;
 
   // Config
@@ -459,12 +460,8 @@ const maxDPR = isMobile ? 1.5 : 2;
   }
 
   heroEl.addEventListener('mousemove', handleMove);
-  heroEl.addEventListener('touchmove', handleMove, { passive: true });
-  heroEl.addEventListener('touchstart', (e) => {
-    handleMove(e);
-    // On mobile, briefly show the effect then release
-    setTimeout(() => { mouse.active = false; hovered = false; }, 1500);
-  }, { passive: true });
+  heroEl.addEventListener('touchmove', (e) => { e.preventDefault(); handleMove(e); }, { passive: false });
+  heroEl.addEventListener('touchstart', handleMove, { passive: true });
   heroEl.addEventListener('mouseleave', () => { mouse.active = false; hovered = false; });
   heroEl.addEventListener('touchend', () => { mouse.active = false; hovered = false; });
 
@@ -668,6 +665,11 @@ if (!isMobile) {
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
+
+  // Film Reel scroll indicator — tap to scroll down
+  document.getElementById('scrollToReel').addEventListener('click', () => {
+    document.getElementById('reelSection').scrollIntoView({ behavior: 'smooth' });
+  });
 })();
 
 /* ═══════════════════════════════════════
