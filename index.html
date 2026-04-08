@@ -11,6 +11,7 @@
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
     :root{--cream:#f5f0eb;--ink:#1a1714;--mid:#8a8279;}
     html{scroll-behavior:smooth;}
+    [id]{scroll-margin-top:60px;}
     body{background:var(--ink);color:var(--cream);font-family:'DM Mono',monospace;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
     /* ── Nav ── */
@@ -104,6 +105,7 @@
       .scroll-indicator{bottom:24px;right:20px;}
       .scroll-indicator span{font-size:0.7rem;}
       .hero-to-gallery{height:56.25vw;min-height:240px;}
+      .hero-to-gallery iframe{width:100%;height:100%;min-width:unset;min-height:unset;top:0;left:0;transform:none;}
       .contact{padding:80px 24px 60px;}
       .contact-inner{grid-template-columns:1fr;gap:48px;}
       .contact-left h2{font-size:2rem;}
@@ -668,7 +670,10 @@ if (!isMobile) {
 
   // Film Reel scroll indicator — tap to scroll down
   document.getElementById('scrollToReel').addEventListener('click', () => {
-    document.getElementById('reelSection').scrollIntoView({ behavior: 'smooth' });
+    const reel = document.getElementById('reelSection');
+    const navHeight = 60;
+    const top = reel.getBoundingClientRect().top + window.scrollY - navHeight;
+    window.scrollTo({ top, behavior: 'smooth' });
   });
 })();
 
