@@ -63,7 +63,7 @@
     .lb-next{right:24px;}
     .lb-counter{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:rgba(255,255,255,0.4);}
 
-    .gallery-title{position:absolute;top:40px;left:50%;transform:translateX(-50%);z-index:10;text-align:center;pointer-events:none;}
+    .gallery-title{position:absolute;top:72px;left:50%;transform:translateX(-50%);z-index:10;text-align:center;pointer-events:none;}
     .gallery-title h2{font-family:'EB Garamond',serif;font-weight:400;font-size:clamp(1.4rem,3vw,2rem);color:rgba(0,0,0,0.6);margin-bottom:6px;}
     .gallery-title span{font-size:0.5rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(0,0,0,0.25);}
 
@@ -247,7 +247,7 @@ const maxDPR = isMobile ? 1.5 : 2;
   const hintEl = document.getElementById('hint');
   const heroEl = document.getElementById('hero');
   const isTouch = 'ontouchstart' in window;
-  if (isTouch) hintEl.textContent = 'touch to reveal';
+  if (isTouch) hintEl.textContent = 'tap to reveal';
   if (!gl) return;
 
   // Config
@@ -460,6 +460,11 @@ const maxDPR = isMobile ? 1.5 : 2;
 
   heroEl.addEventListener('mousemove', handleMove);
   heroEl.addEventListener('touchmove', handleMove, { passive: true });
+  heroEl.addEventListener('touchstart', (e) => {
+    handleMove(e);
+    // On mobile, briefly show the effect then release
+    setTimeout(() => { mouse.active = false; hovered = false; }, 1500);
+  }, { passive: true });
   heroEl.addEventListener('mouseleave', () => { mouse.active = false; hovered = false; });
   heroEl.addEventListener('touchend', () => { mouse.active = false; hovered = false; });
 
