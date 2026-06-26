@@ -53,7 +53,7 @@
     .nav-links a.active{color:var(--cream);}
     .nav-links a.active::after{width:100%;}
 
-    .hero{position:relative;width:100%;height:100dvh;overflow:hidden;cursor:crosshair;}
+    .hero{position:relative;width:100%;height:100dvh;overflow:hidden;cursor:crosshair;touch-action:pan-y;}
     .hero canvas{display:block;width:100%;height:130%;position:absolute;top:-5%;left:0;opacity:0;transition:opacity 0.9s ease;}
     .hero-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:48px 56px;pointer-events:none;z-index:2;}
     .hero-label{font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(245,240,235,0.5);margin-bottom:16px;}
@@ -513,8 +513,12 @@ const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').mat
   }
 
   heroEl.addEventListener('mousemove', handleMove);
-  heroEl.addEventListener('touchmove', (e) => { e.preventDefault(); handleMove(e); }, { passive: false });
+
+  // Touch: ripple on tap/drag, but never block the page. CSS `touch-action: pan-y`
+  // hands vertical scrolling to the browser natively (can't be cancelled by JS), so a
+  // swipe-up scrolls past the hero while taps and swirls still drive the ripple.
   heroEl.addEventListener('touchstart', handleMove, { passive: true });
+  heroEl.addEventListener('touchmove', handleMove, { passive: true });
   heroEl.addEventListener('mouseleave', () => { mouse.active = false; hovered = false; });
   heroEl.addEventListener('touchend', () => { mouse.active = false; hovered = false; });
 
