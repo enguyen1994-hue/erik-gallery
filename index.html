@@ -102,6 +102,14 @@
 
     .gallery-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(0,0,0,0.25);z-index:10;pointer-events:none;}
 
+    /* ── Sound ── */
+    .sound{background:var(--ink);padding:120px 48px;display:flex;flex-direction:column;align-items:center;text-align:center;}
+    .sound h2{font-family:'EB Garamond',serif;font-weight:400;font-size:clamp(2.2rem,5vw,3.5rem);color:var(--cream);margin-bottom:10px;}
+    .sound .sound-label{font-size:0.5rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--mid);margin-bottom:40px;}
+    .sound .sound-embed{width:100%;max-width:560px;}
+    .sound iframe{border-radius:12px;display:block;width:100%;border:0;}
+    @media(max-width:768px){.sound{padding:80px 24px;}}
+
     /* ── Contact ── */
     .contact{background:var(--ink);padding:120px 48px 80px;position:relative;}
     .contact-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;}
@@ -164,6 +172,7 @@
     <div class="nav-links">
       <a href="#reelSection">Reel</a>
       <a href="#galleryScroll">Work</a>
+      <a href="#sound">Sound</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
@@ -195,6 +204,15 @@
       </div>
       <div class="scene" id="scene"></div>
       <div class="gallery-hint">scroll to explore</div>
+    </div>
+  </section>
+
+  <!-- Sound -->
+  <section class="sound" id="sound">
+    <h2>Sound</h2>
+    <div class="sound-label">Selected Sound — Badnights</div>
+    <div class="sound-embed">
+      <iframe src="https://open.spotify.com/embed/playlist/5WPi8AbPVjHBlD3w2HItTU?utm_source=generator&theme=0" width="100%" height="352" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen title="Badnights — Selected Sound"></iframe>
     </div>
   </section>
 
