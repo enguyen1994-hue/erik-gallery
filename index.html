@@ -190,8 +190,8 @@
   <section class="gallery-scroll" id="galleryScroll">
     <div class="gallery-sticky">
       <div class="gallery-title">
-        <h2>Portraits</h2>
-        <span>Selected Work</span>
+        <h2>Selected Work</h2>
+        <span>Stills &amp; Frames</span>
       </div>
       <div class="scene" id="scene"></div>
       <div class="gallery-hint">scroll to explore</div>
@@ -384,7 +384,7 @@ const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').mat
       // Mouse mask
       if (u_mouse.x >= 0.0 && u_mouse.x <= 1.0 && u_mouse.y >= 0.0 && u_mouse.y <= 1.0 && mr > 0.0) {
         float d = distance(uv, u_mouse);
-        mask = max(mask, smoothstep(mr, mr * 0.8, d));
+        mask = max(mask, smoothstep(mr, mr * 0.5, d));
       }
 
       // Wake masks
@@ -392,7 +392,7 @@ const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').mat
         if (i >= u_wakeCount) break;
         vec2 w = u_wake[i].xy;
         float d = distance(uv, w);
-        mask = max(mask, smoothstep(mr, mr * 0.8, d));
+        mask = max(mask, smoothstep(mr, mr * 0.5, d));
       }
 
       vec3 finalColor = mix(grayColor, color.rgb, mask);
@@ -527,7 +527,7 @@ const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').mat
       lastHovered = hovered;
       maskStart = ts;
       maskFrom = maskRadius;
-      maskTo = hovered ? 1.5 : 0;
+      maskTo = hovered ? 1.8 : 0;
     }
     if (maskStart === null) maskStart = ts;
     const elapsed = Math.min((ts - maskStart) / 650, 1);
